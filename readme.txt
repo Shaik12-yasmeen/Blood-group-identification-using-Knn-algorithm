@@ -33,15 +33,6 @@ Output
 The model predicts blood group types:
 A+, A-, B+, B-, AB+, AB-, O+, O-
 
-Requirements
-Python 3.8+
-numpy
-pandas
-scikit-learn
-matplotlib
 
-How to Run
-python blood_group_knn.py
 
-Contact
-For queries or improvements, feel free to reach out.
+
