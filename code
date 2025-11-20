@@ -1,0 +1,41 @@
+import pandas as pd 
+from sklearn.model_selection import train_test_split 
+from sklearn.neighbors import KNeighborsClassifier 
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix 
+ 
+# Step 1: Create a synthetic dataset 
+data = { 
+    'Antigen_A': [1, 0, 1, 0, 1, 0, 1, 1, 0, 0], 
+    'Antigen': [0, 1, 1, 0, 0, 1, 1, 1, 0, 0], 
+    'RH_Factor': [1, 0, 1, 0, 0, 1, 1, 1, 0, 0], 
+    'Blood_Group': ['A+', 'B-', 'AB+', 'O-', 'A-', 'B+', 'AB-', 'AB+', 'O+', 'O-'] 
+} 
+ 
+# Convert the data to a DataFrame 
+df = pd.DataFrame(data) 
+ 
+10 
+ 
+  
+# Step 2: Encode the target variable 
+df['Blood_Group'] = df['Blood_Group'].astype('category').cat. codes 
+ 
+# Step 3: Define features and target 
+X = df[['Antigen_A', 'Antigen_B', 'RH_Factor']] 
+y = df['Blood_Group'] 
+ 
+# Step 4: Split the dataset into training and testing sets 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42) 
+ 
+# Step 5: Initialize and train the KNN classifier 
+knn = KNeighborsClassifier(n_neighbors=3) 
+knn.fit(X_train, y_train) 
+ 
+# Step 6: Make predictions 
+y_pred = knn.predict(X_test) 
+ 
+# Step 7: Evaluate the model 
+accuracy = accuracy_score(y_test, y_pred) 
+print("Accuracy:", accuracy) 
+print("Classification Report:\n", classification_report(y_test, y_pred, zero_division=1)) 
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
